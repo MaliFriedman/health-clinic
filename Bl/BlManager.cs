@@ -17,6 +17,8 @@ namespace Bl
 
         public IDoctorManager DoctorManager { get; }
         public IPatientManager PatientManager { get; }
+        public IAppointmentManager AppointmentManager { get; }
+        public IAvailableAppointmentServiceBl AvailableAppointmentServiceBl { get; }
 
         public BlManager(IDal dal)
         {
@@ -26,6 +28,8 @@ namespace Bl
             services.AddSingleton<IDoctorManager, DoctorManager>();
             services.AddSingleton<IDal, DalManager>();
             services.AddSingleton<IPatientManager, PatientManager>();
+            services.AddSingleton<IAppointmentManager, AppointmentManager>();
+            services.AddSingleton<IAvailableAppointmentServiceBl, AvailableAppointmentServiceBl>();
 
 
 
@@ -33,6 +37,8 @@ namespace Bl
             ServiceProvider serviceProvider = services.BuildServiceProvider();
             DoctorManager = serviceProvider.GetService<IDoctorManager>();
             PatientManager = serviceProvider.GetService<IPatientManager>();
+            AppointmentManager = serviceProvider.GetService<IAppointmentManager>();
+            AvailableAppointmentServiceBl = serviceProvider.GetService<IAvailableAppointmentServiceBl>();
 
 
         }
