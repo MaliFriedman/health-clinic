@@ -42,7 +42,7 @@ namespace Bl.Services
 
         public PatientBl GetPatient(string id)
         {
-            return mapper.Map<PatientBl>(patientDal.GetById(id));
+            return mapper.Map<PatientBl>(patientDal.GetById(id).Result);
         }
         public List<PatientBl> GetPatients()
         {

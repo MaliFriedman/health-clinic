@@ -44,6 +44,12 @@ namespace Webapi.Controllers
         {
             return DoctorManager.GetDoctor();
         }
+        [HttpPost("add-weekly-appointments")]
+        public async Task<IActionResult> AddWeeklyAvailableAppointments([FromQuery] string doctorId, [FromQuery] DateTime startDate, [FromQuery] int slotsPerDay)
+        {
+            await DoctorManager.AddWeeklyAvailableAppointments(doctorId, startDate, slotsPerDay);
+            return Ok("Weekly appointments added successfully.");
+        }
 
     }
 }

@@ -10,7 +10,7 @@ using AutoMapper;
 
 namespace Bl.Services
 {
-    internal class AppointmentManager
+    public class AppointmentManager : IAppointmentManager
     {
         private readonly IAvailableAppointmentDal availableAppointmentdal;
         private readonly INotAvailableAppointmentDal notAvailableAppointmentdal;
@@ -46,7 +46,7 @@ namespace Bl.Services
             return mapper.Map<NotAvailableAppointmentBl>(notAvailableAppointment);
 
         }
-       
+
         public AvailableAppointment CastingnotavailableTOavailable(NotAvailableAppointment notAvailableAppointment)
         {
             var availableAppointment = new AvailableAppointment()

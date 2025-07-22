@@ -34,10 +34,11 @@ public partial class DB_Manager : DbContext
             string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
             AppDomain.CurrentDomain.SetData("DataDirectory", projectRoot);
 
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;
+            string connectionString = @"Data Source=.\SQLEXPRESS;
                                     AttachDbFilename=|DataDirectory|\Dal\data\Db.mdf;
                                     Integrated Security=True;
-                                    Connect Timeout=30";
+                                    Connect Timeout=30;
+                                    TrustServerCertificate=True;";
             optionsBuilder.UseSqlServer(connectionString);
         }
     }

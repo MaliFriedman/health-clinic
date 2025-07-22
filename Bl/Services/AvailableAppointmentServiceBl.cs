@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bl.Api;
 using Dal.Api;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using Webapi.models;
 
 namespace Bl.Services
 {
-    public class AvailableAppointmentServiceBl
+    public class AvailableAppointmentServiceBl : IAvailableAppointmentServiceBl
     {
         private readonly IAvailableAppointmentDal availableAppointmentDal;
         private readonly IMapper mapper;

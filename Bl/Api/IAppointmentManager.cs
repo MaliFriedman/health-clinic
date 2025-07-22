@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Webapi.models;
-namespace Bl.Api
+﻿using Webapi.models;
+
+namespace Bl.Services
 {
     public interface IAppointmentManager
     {
-        Task<List<AvailableAppointmentBl>> GetAllAvailableAppointments();
-
-        Task<List<NotAvailableAppointmentBl>> GetAppointmentsByDate(DateTime date);
-
-        Task<List<PassedAppointmentBl>> GetAllPassedAppointments();
-
-        Task BookAppointment(int availableAppointmentId, string patientId);
-
-        Task CompleteAppointment(int notAvailableAppointmentId, string description, bool didArrive);
+        AvailableAppointment CancleAnAppointment(NotAvailableAppointmentBl notAvailableAppointmentBl);
+        NotAvailableAppointment CastingavailableTOnotavailable(AvailableAppointment availableAppointment);
+        AvailableAppointment CastingnotavailableTOavailable(NotAvailableAppointment notAvailableAppointment);
         NotAvailableAppointmentBl MakeAnAppointment(AvailableAppointmentBl availableAppointmentBl);
+        NotAvailableAppointment UpdateAnAppointment(NotAvailableAppointmentBl notAvailableAppointmentBl);
     }
 }
-

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bl.Api;
+using Bl.Services;
 
 namespace WebApi.Controllers
 {
@@ -13,32 +14,34 @@ namespace WebApi.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentManager _appointmentManager;
+        private readonly IAvailableAppointmentServiceBl _availableAppointmentServiceBl;
 
-        public AppointmentController(IAppointmentManager appointmentManager)
+        public AppointmentController(IBlManager blManager)
         {
-            _appointmentManager = appointmentManager;
+            _appointmentManager = blManager.AppointmentManager;
+            _availableAppointmentServiceBl = blManager.AvailableAppointmentServiceBl;
         }
 
-        // הזמנת תור
-        [HttpPost("Book")]
-        public async Task<IActionResult> Book([FromQuery] int availableAppointmentId, [FromQuery] string patientId)
-        {
-            try
-            {
-                await _appointmentManager.BookAppointment(availableAppointmentId, patientId);
-                return Ok("Appointment booked successfully.");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Booking failed: {ex.Message}");
-            }
-        }
+        //// הזמנת תור
+        //[HttpPost("Book")]
+        //public async Task<IActionResult> Book([FromQuery] int availableAppointmentId, [FromQuery] string patientId)
+        //{
+        //    try
+        //    {
+        //        await _appointmentManager.BookAppointment(availableAppointmentId, patientId);
+        //        return Ok("Appointment booked successfully.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest($"Booking failed: {ex.Message}");
+        //    }
+        //}
 
         // קבלת כל התורים הזמינים
         [HttpGet("Available")]
         public async Task<ActionResult<List<AvailableAppointment>>> GetAllAvailable()
         {
-            var appointments = await _appointmentManager.GetAllAvailableAppointments();
+            var appointments = await _availableAppointmentServiceBl.GetAll();
             return Ok(appointments);
         }
 
@@ -49,7 +52,7 @@ namespace WebApi.Controllers
         [HttpGet("ByDate")]
         public async Task<ActionResult<List<AvailableAppointment>>> GetByDate([FromQuery] DateTime date)
         {
-            var appointments = await _appointmentManager.GetAppointmentsByDate(date);
+            var appointments = await _availableAppointmentServiceBl.GetAppointmentsByDate(date);
             return Ok(appointments);
         }
 

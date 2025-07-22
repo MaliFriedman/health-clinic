@@ -9,5 +9,8 @@ namespace Bl.Api
         DoctorBl GetDoctor(string id);
         void RemoveDoctor(string id, string phoneNumber);
         void UpdateDoctor(DoctorBl doctorBl);
+
+        Task AddWeeklyAvailableAppointments(string doctorId, DateTime startDate, int slotsPerDay);
+
     }
 }

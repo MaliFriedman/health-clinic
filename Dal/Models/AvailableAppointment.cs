@@ -12,7 +12,7 @@ public partial class AvailableAppointment
 
     public string DoctorId { get; set; } = null!;
 
-    public string PatientId { get; set; } = null!;
+    public string? PatientId { get; set; } = null!;
 
     public virtual Doctor Doctor { get; set; } = null!;
 
